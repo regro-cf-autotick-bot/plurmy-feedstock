@@ -12,20 +12,22 @@ source:
 build:
   noarch: python 
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
   entry_points:
     - plurmy = plurmy.orchestrate:main
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.7 
+    - python >={{ python_min }}
     - redis-py
     - hiredis 
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - plurmy
 
